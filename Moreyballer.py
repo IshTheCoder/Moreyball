@@ -17,11 +17,11 @@ import plotly
 plotly.tools.set_credentials_file(username='swishan', api_key='nQfq97kmHYvg1HhlKSp5')
 
 
-playoffs=pd.read_html('Playoff_per.xls')
-DF=(playoffs[0])
-names=DF.iloc[:,1]
+# playoffs=pd.read_html('Playoff_per.xls')
+# DF=(playoffs[0])
+# names=DF.iloc[:,1]
 
-TS=DF.iloc[:,-1]
+# TS=DF.iloc[:,-1]
 
 
 #print(TS)
