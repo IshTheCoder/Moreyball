@@ -28,6 +28,30 @@ plotly.tools.set_credentials_file(username='swishan', api_key='nQfq97kmHYvg1HhlK
 f1='leaguedashplayershotlocations_per.json'
 f2='leaguedashplayershotlocations.json'
 
+magma = [[0.0, 'rgb(0, 0, 3)'],
+ [0.1, 'rgb(20, 13, 53)'],
+ [0.2, 'rgb(59, 15, 111)'],
+ [0.3, 'rgb(99, 25, 127)'],
+ [0.4, 'rgb(140, 41, 128)'],
+ [0.5, 'rgb(182, 54, 121)'],
+ [0.6, 'rgb(221, 73, 104)'],
+ [0.7, 'rgb(246, 112, 91)'],
+ [0.8, 'rgb(253, 159, 108)'],
+ [0.9, 'rgb(253, 207, 146)'],
+ [1.0, 'rgb(251, 252, 191)']]
+
+
+inferno = [[0.0, 'rgb(0, 0, 3)'],
+ [0.1, 'rgb(22, 11, 57)'],
+ [0.2, 'rgb(65, 9, 103)'],
+ [0.3, 'rgb(106, 23, 110)'],
+ [0.4, 'rgb(147, 37, 103)'],
+ [0.5, 'rgb(187, 55, 84)'],
+ [0.6, 'rgb(220, 80, 57)'],
+ [0.7, 'rgb(243, 119, 25)'],
+ [0.8, 'rgb(251, 164, 10)'],
+ [0.9, 'rgb(245, 215, 69)'],
+ [1.0, 'rgb(248, 250, 100)']]
 
 
 with open(f1) as f:
@@ -140,7 +164,16 @@ data = [
         hoverinfo = 'text',
         mode='markers',
         marker=dict(
-        	size=FGA_list
+        	size=FGA_list,
+        	cmax=1.0,
+        	cmin=0.0,
+        	color=morey_vals,
+        	colorbar=dict(
+        	title="Morey-range percentage"
+        	),
+       	colorscale=inferno
+
+
         	)
 
 		),
@@ -150,22 +183,36 @@ data = [
 
 layout = go.Layout(
 
+	plot_bgcolor='rgba(0,0,0)',
+	paper_bgcolor='rgba(0,0,0)',
+
+
+
 	title='League-wide Moreyball indexes',
-    xaxis=dict(
+	font=dict(
+        family="sans serif",
+        color="LightSeaGreen"
+    ),
+
+    xaxis=dict( 
+    	showticklabels=False,
+
         range=[0, 1],
     ),
-    yaxis=dict(
+    yaxis=dict(showgrid=True,
+    	gridcolor='SeaGreen',
         range=[0, 1],
         title='Moreyball index',
 
     )
+
 )
 
 fig = go.Figure(data=data, layout=layout)
 
 #py.iplot(fig,sharing='public',filename='moreyball')
 
-plotly.offline.plot(data, filename='moreyball.html')
+plotly.offline.plot(fig, filename='moreyball.html')
 
 
 
